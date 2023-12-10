@@ -16,7 +16,7 @@ last_digit_finder = re.compile(".*(\d)[^\d]*", re.DOTALL)
 for elem in text:
     first_digit = first_digit_finder.match(elem)
     last_digit = last_digit_finder.match(elem)
-    res += int(first_digit.groups(0)[0] + last_digit.groups(0)[0])
+    res += int(first_digit.groups()[0] + last_digit.groups()[0])
 
 print("Your Advent of code day 1 part 1 answer is : " + str(res))
 

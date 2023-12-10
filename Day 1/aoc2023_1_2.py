@@ -44,10 +44,10 @@ last_digit_letters_finder = re.compile(".*(zero|one|two|three|four|five|six|seve
 
 for elem in text:
     first_digit = first_digit_finder.match(elem)
-    first_digit_index = elem.index(first_digit.groups(0)[0])
+    first_digit_index = elem.index(first_digit.groups()[0])
 
     last_digit = last_digit_finder.match(elem)
-    last_digit_index = elem.rindex(last_digit.groups(0)[0])
+    last_digit_index = elem.rindex(last_digit.groups()[0])
 
     match = first_digit_letters_finder.search(elem)
     if match is not None:
@@ -55,20 +55,20 @@ for elem in text:
         if first_digit_letter_index < first_digit_index:
             first_digit_int = letters_to_digit(elem[match.start():match.end()])
         else:
-            first_digit_int = int(first_digit.groups(0)[0])
+            first_digit_int = int(first_digit.groups()[0])
     else:
-        first_digit_int = int(first_digit.groups(0)[0])
+        first_digit_int = int(first_digit.groups()[0])
 
     match = last_digit_letters_finder.match(elem)
     if match is not None:
-        last_digit_letter = match.groups(0)[0]
+        last_digit_letter = match.groups()[0]
         last_digit_letter_index = elem.rindex(last_digit_letter)
         if last_digit_letter_index > last_digit_index:
             last_digit_int = letters_to_digit(last_digit_letter)
         else:
-            last_digit_int = int(last_digit.groups(0)[0])
+            last_digit_int = int(last_digit.groups()[0])
     else:
-        last_digit_int = int(last_digit.groups(0)[0])
+        last_digit_int = int(last_digit.groups()[0])
 
     res += 10 * first_digit_int + last_digit_int
 
