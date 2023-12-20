@@ -11,8 +11,8 @@ except IndexError:
 
 
 lines = open(file, "r").readlines()
-number_finder = re.compile("[^\d]*(\d+)", re.DOTALL)
-symbol_finder = re.compile("[\d.]*[^\d.]", re.DOTALL)
+number_finder = re.compile("[^\d]*(\d+)", re.DOTALL) #Parses everything up to the first number
+symbol_finder = re.compile("[\d.]*[^\d.\n]", re.DOTALL) #Parses averything up to the first non-number non-dot character
 res = 0
 
 previous_line = ""
@@ -20,6 +20,7 @@ current_line = lines[0]
 next_line = lines[1]
 line_length = len(current_line)
 
+#First line
 match = number_finder.match(current_line)
 current_char = 0
 while match:
@@ -31,6 +32,7 @@ while match:
     current_char += match.span()[1]
     match = number_finder.match(current_line[current_char:])
 
+#Middle lines
 for line in lines[2:]:
     previous_line = current_line
     current_line = next_line
@@ -50,6 +52,7 @@ for line in lines[2:]:
 previous_line = current_line
 current_line = next_line
 
+#Last line
 match = number_finder.match(current_line)
 current_char = 0
 while match:
