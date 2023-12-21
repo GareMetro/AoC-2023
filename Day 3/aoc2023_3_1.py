@@ -25,7 +25,7 @@ match = number_finder.match(current_line)
 current_char = 0
 while match:
     for elem in [current_line, next_line]:
-        check_symbol = elem[max(current_char + match.span()[1] - len(match.groups()[0]) - 1, 0):min(current_char + match.span()[1] + 1, line_length)]
+        check_symbol = elem[max(current_char + match.span()[1] - len(match.groups()[0]) - 1, 0):min(current_char + match.span()[1] + 1, line_length - 1)]
         if symbol_finder.match(check_symbol):
             res += int(match.groups()[0])
             break
@@ -42,7 +42,7 @@ for line in lines[2:]:
     current_char = 0
     while match:
         for elem in [previous_line, current_line, next_line]:
-            check_symbol = elem[max(current_char + match.span()[1] - len(match.groups()[0]) - 1, 0):min(current_char + match.span()[1] + 1, line_length)]
+            check_symbol = elem[max(current_char + match.span()[1] - len(match.groups()[0]) - 1, 0):min(current_char + match.span()[1] + 1, line_length - 1)]
             if symbol_finder.match(check_symbol):
                 res += int(match.groups()[0])
                 break
@@ -57,7 +57,7 @@ match = number_finder.match(current_line)
 current_char = 0
 while match:
     for elem in [previous_line, current_line]:
-        check_symbol = elem[max(current_char + match.span()[1] - len(match.groups()[0]) - 1, 0):min(current_char + match.span()[1] + 1, line_length)]
+        check_symbol = elem[max(current_char + match.span()[1] - len(match.groups()[0]) - 1, 0):min(current_char + match.span()[1] + 1, line_length - 1)]
         if symbol_finder.match(check_symbol):
             res += int(match.groups()[0])
             break
